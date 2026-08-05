@@ -3,16 +3,24 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "api-gateway"
+name = "api-gateway-byom"
 version = "1.0.0"
-description = "API Gateway for Distributed Issue Tracker"
-
+description = "API Gateway for Distributed Issue Tracker - Central entry point for all API requests with routing, JWT validation, rate limiting, and TLS termination"
+readme = "README.md"
 requires-python = ">=3.11"
 license = "CC-BY-NC-4.0"
-authors = [{name = "Your Name", email = "your.email@example.com"}]
+authors = [{name = "om kumar sahu", email = "omkumarsahu747@gmail.com"}]
+maintainers = [{name = "om kumar sahu", email = "omkumarsahu747@gmail.com"}]
+keywords = ["fastapi", "api-gateway", "microservices", "reverse-proxy", "traefik", "jwt", "rate-limiting"]
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
 dependencies = [
     "fastapi==0.104.1",
@@ -22,6 +30,12 @@ dependencies = [
     "httpx==0.25.2",
     "python-dotenv==1.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Repository = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Documentation = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-/tree/master/services/api-gateway"
+"Bug Tracker" = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-/issues"
 
 [tool.setuptools]
 py-modules = ["main"]

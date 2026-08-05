@@ -3,16 +3,24 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "user-service"
+name = "user-service-byom"
 version = "1.0.0"
-description = "User Service for Distributed Issue Tracker"
-
+description = "User Service for Distributed Issue Tracker - User profile, team, and preference management with role-based access control and event-driven architecture"
+readme = "README.md"
 requires-python = ">=3.11"
 license = "CC-BY-NC-4.0"
-authors = [{name = "Your Name", email = "your.email@example.com"}]
+authors = [{name = "om kumar sahu", email = "omkumarsahu747@gmail.com"}]
+maintainers = [{name = "om kumar sahu", email = "omkumarsahu747@gmail.com"}]
+keywords = ["fastapi", "user-management", "teams", "rbac", "profiles", "microservices", "identity", "permissions"]
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
 dependencies = [
     "fastapi==0.104.1",
@@ -40,6 +48,12 @@ dependencies = [
     "alembic==1.13.1",
     "python-dotenv==1.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Repository = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Documentation = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-/tree/master/services/user-service"
+"Bug Tracker" = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-/issues"
 
 [tool.setuptools]
 package-dir = {"" = "."}
