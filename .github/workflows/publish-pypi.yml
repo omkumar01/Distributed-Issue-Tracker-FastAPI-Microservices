@@ -31,7 +31,6 @@ jobs:
           - notification-service
           - search-service
           - audit-service
-    environment: pypi
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

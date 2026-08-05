@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "audit-service-byom"
-version = "1.0.0"
+version = "1.0.1"
 description = "Audit Service for Distributed Issue Tracker - Audit logging, compliance events, data access tracking, and security monitoring with event-driven architecture"
 readme = "README.md"
 requires-python = ">=3.11"

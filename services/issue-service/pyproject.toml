@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "issue-service-byom"
-version = "1.0.0"
+version = "1.0.1"
 description = "Issue Service for Distributed Issue Tracker - Core issue tracking with workflow states, SLA management, assignments, and event-driven integrations"
 readme = "README.md"
 requires-python = ">=3.11"

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "comment-service-byom"
-version = "1.0.0"
+version = "1.0.1"
 description = "Comment Service for Distributed Issue Tracker - Comments, mentions, edit history, and real-time updates with WebSocket support"
 readme = "README.md"
 requires-python = ">=3.11"

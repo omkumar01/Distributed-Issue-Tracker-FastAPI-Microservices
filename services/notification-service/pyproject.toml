@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "notification-service-byom"
-version = "1.0.0"
+version = "1.0.1"
 description = "Notification Service for Distributed Issue Tracker - Async notification delivery with email, in-app, webhook channels, Celery background processing, and user preferences"
 readme = "README.md"
 requires-python = ">=3.11"
