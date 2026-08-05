@@ -289,7 +289,17 @@ For issues or questions:
 
 ## 📄 License
 
-MIT License - See LICENSE file for details
+**CC BY-NC 4.0** (Creative Commons Attribution-NonCommercial 4.0 International) — See [LICENSE](LICENSE) file for details.
+
+This is a **non-commercial** license:
+- ✅ Free to share and adapt for **non-commercial** purposes with attribution
+- ❌ **Commercial use is prohibited** without explicit permission
+
+### 🏢 Commercial License
+
+For commercial use, licensing, or white-labeling inquiries, please contact:
+
+**om kumar sahu** — <omkumarsahu747@gmail.com>
 
 ## 🎯 Key Learning Outcomes
 

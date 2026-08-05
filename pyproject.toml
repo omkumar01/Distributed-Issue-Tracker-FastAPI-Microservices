@@ -9,17 +9,17 @@ name = "distributed-issue-tracker"
 version = "1.0.1"
 description = "Cloud-native microservices-based issue management platform"
 requires-python = ">=3.11"
-license = {text = "MIT"}
+license = "CC-BY-NC-4.0"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "om kumar sahu", email = "omkumarsahu747@gmail.com"}
 ]
 keywords = ["microservices", "fastapi", "issue-tracking"]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/FastApi-Issue-tracker"
-Documentation = "https://github.com/yourusername/FastApi-Issue-tracker"
-Repository = "https://github.com/yourusername/FastApi-Issue-tracker"
-Issues = "https://github.com/yourusername/FastApi-Issue-tracker/issues"
+Homepage = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Documentation = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Repository = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-"
+Issues = "https://github.com/omkumar01/Distributed-Issue-Tracker-FastAPI-Microservices-/issues"
 
 [tool.black]
 line-length = 100
