@@ -63,7 +63,6 @@ This project demonstrates real-world backend system design with:
 ### Prerequisites
 - Docker & Docker Compose
 - Python 3.11+
-- Make (optional, for convenience commands)
 
 ### Setup & Run
 
@@ -81,7 +80,6 @@ This project demonstrates real-world backend system design with:
 
 3. **Start all services**
    ```bash
-   make up
    # or: docker-compose up -d
    ```
 
@@ -93,32 +91,10 @@ This project demonstrates real-world backend system design with:
 
 5. **View logs**
    ```bash
-   make logs
-   # or: docker-compose logs -f
+
+   docker-compose logs -f
    ```
 
-### Development
-
-**Install dependencies**
-```bash
-make install-deps
-```
-
-**Run linting and formatting**
-```bash
-make lint
-make format
-```
-
-**Run tests**
-```bash
-make test
-```
-
-**Stop services**
-```bash
-make down
-```
 
 ## 📁 Project Structure
 
@@ -147,7 +123,6 @@ FastApi-Issue-tracker/
 ├── scripts/                      # Setup & migration scripts
 ├── docs/                         # Architecture documentation
 │
-├── Makefile                      # Development commands
 ├── docker-compose.yml            # Local development stack
 ├── .env.example                  # Environment variables template
 └── README.md                     # This file
@@ -274,11 +249,9 @@ GitHub Actions automatically:
 
 ## 🤝 Contributing
 
-1. Create a feature branch from `main`
+1. Create a feature branch from `master`
 2. Make your changes
-3. Run `make lint` and `make format`
-4. Run `make test` to ensure tests pass
-5. Submit a pull request
+3. Submit a pull request
 
 ## 📋 Common Tasks
 
