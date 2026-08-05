@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "api-gateway"
+version = "1.0.0"
+description = "API Gateway for Distributed Issue Tracker"
+
+requires-python = ">=3.11"
+license = "CC-BY-NC-4.0"
+authors = [{name = "Your Name", email = "your.email@example.com"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fastapi==0.104.1",
+    "uvicorn[standard]==0.24.0",
+    "pydantic==2.5.0",
+    "pydantic-settings==2.1.0",
+    "httpx==0.25.2",
+    "python-dotenv==1.0.0",
+]
+
+[tool.setuptools]
+py-modules = ["main"]
+packages.find.include = ["shared*"]
+packages.find.exclude = ["tests*"]

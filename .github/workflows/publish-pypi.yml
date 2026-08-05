@@ -1,0 +1,90 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write  # For PyPI trusted publishing (optional)
+
+jobs:
+  publish:
+    name: Publish ${{ matrix.service }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - api-gateway
+          - auth-service
+          - user-service
+          - project-service
+          - issue-service
+          - comment-service
+          - notification-service
+          - search-service
+          - audit-service
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install build
+        run: pip install build
+
+      - name: Compute version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            # Extract version from tag (e.g., refs/tags/v1.2.3 -> 1.2.3)
+            echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+          else
+            # Manual dispatch input
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Vendor shared into ${{ matrix.service }}
+        run: |
+          rm -rf services/${{ matrix.service }}/shared
+          cp -R shared services/${{ matrix.service }}/shared
+
+      - name: Patch version in pyproject.toml
+        run: |
+          sed -i "s/^version = .*/version = \"${{ steps.version.outputs.VERSION }}\"/" services/${{ matrix.service }}/pyproject.toml
+
+      - name: Build wheel for ${{ matrix.service }}
+        run: |
+          cd services/${{ matrix.service }}
+          python -m build --wheel --outdir ../../dist
+
+      - name: Upload wheel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.service }}-wheel
+          path: dist/*.whl
+          retention-days: 7
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+          password: ${{ secrets.PYPI_TOKEN }}
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Clean up vendored shared
+        if: always()
+        run: |
+          rm -rf services/${{ matrix.service }}/shared
