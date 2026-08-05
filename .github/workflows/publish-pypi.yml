@@ -13,7 +13,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write  # For PyPI trusted publishing (optional)
+  id-token: write  # Required for PyPI Trusted Publishing (OIDC)
 
 jobs:
   publish:
@@ -31,6 +31,7 @@ jobs:
           - notification-service
           - search-service
           - audit-service
+    environment: pypi
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -80,9 +81,6 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist
-          password: ${{ secrets.PYPI_TOKEN }}
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
       - name: Clean up vendored shared
         if: always()
