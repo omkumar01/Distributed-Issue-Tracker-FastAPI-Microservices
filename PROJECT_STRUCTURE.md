@@ -14,7 +14,6 @@ This document provides an overview of the complete Distributed Issue Tracker pro
 ├── CONTRIBUTING.md          # Contributing guidelines
 ├── CHANGELOG.md             # Version history
 ├── LICENSE                  # MIT License
-├── Makefile                 # Development commands
 ├── docker-compose.yml       # Local development orchestration
 ├── pytest.ini               # Pytest configuration
 ├── pyproject.toml          # Python project metadata
@@ -181,30 +180,6 @@ docs/
 - [ ] Real-time WebSocket support
 - [ ] API documentation (Swagger/OpenAPI)
 
-## 🔧 Development Commands
-
-```bash
-# Setup
-make install-deps      # Install all dependencies
-make setup            # Setup development environment
-
-# Running
-make up               # Start all services
-make down             # Stop all services
-make logs             # View logs
-
-# Development
-make lint             # Run linting
-make format           # Format code
-make test             # Run tests
-
-# Database
-make migrate-db       # Run migrations
-make seed-db          # Seed with sample data
-
-# Cleanup
-make clean            # Remove containers and volumes
-```
 
 ## 🌐 Service Port Map
 
