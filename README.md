@@ -80,7 +80,7 @@ This project demonstrates real-world backend system design with:
 
 3. **Start all services**
    ```bash
-   # or: docker-compose up -d
+   docker-compose up -d --build
    ```
 
 4. **Verify services**
