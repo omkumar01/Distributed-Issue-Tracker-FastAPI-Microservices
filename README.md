@@ -17,14 +17,14 @@ This project demonstrates real-world backend system design with:
 | Service | Port | Responsibility |
 |---------|------|-----------------|
 | API Gateway | 8000 | Request routing, TLS, rate limiting, JWT validation |
-| Auth Service | 8001 | Authentication, JWT issuance, OAuth2 integration |
-| User Service | 8002 | User profiles, teams, preferences |
-| Project Service | 8003 | Project lifecycle, team membership |
-| Issue Service | 8004 | Issue CRUD, workflow states, assignments |
-| Comment Service | 8005 | Comments, mentions, edit history |
+| Auth Service | 8000 | Authentication, JWT issuance, OAuth2 integration |
+| User Service | 8000 | User profiles, teams, preferences |
+| Project Service | 8000 | Project lifecycle, team membership |
+| Issue Service | 8000 | Issue CRUD, workflow states, assignments |
+| Comment Service | 8000 | Comments, mentions, edit history |
 | Notification Service | 8006 | Email, in-app notifications, webhooks |
-| Search Service | 8007 | Full-text search, filters, faceted queries |
-| Audit Service | 8008 | Activity logs, compliance history |
+| Search Service | 8000 | Full-text search, filters, faceted queries |
+| Audit Service | 8000 | Activity logs, compliance history |
 
 ## 🛠️ Tech Stack
 

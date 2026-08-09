@@ -7,8 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_DB: issue_tracker
-    ports:
-      - "5432:5432"
+    # ports removed - internal network only
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -17,12 +16,11 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
+    # ports removed - internal network only
     volumes:
       - redis_data:/data
     healthcheck:
@@ -31,16 +29,14 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   rabbitmq:
     image: rabbitmq:3.12-management-alpine
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+    # ports removed - internal network only
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
@@ -49,7 +45,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
@@ -57,8 +53,7 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "9200:9200"
+    # ports removed - internal network only
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     healthcheck:
@@ -67,17 +62,15 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   jaeger:
     image: jaegertracing/all-in-one:latest
-    ports:
-      - "6831:6831/udp"
-      - "16686:16686"
+    # ports removed - internal network only
     environment:
       COLLECTOR_ZIPKIN_HTTP_PORT: 9411
     networks:
-      - issue_tracker_network
+      - internal
 
   # Microservices
   api-gateway:
@@ -106,14 +99,14 @@ services:
     env_file:
       - .env
     networks:
-      - issue_tracker_network
+      - public
+      - internal
 
   auth-service:
     build:
       context: .
       dockerfile: services/auth-service/Dockerfile
-    ports:
-      - "8001:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       postgres:
         condition: service_healthy
@@ -130,14 +123,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   user-service:
     build:
       context: .
       dockerfile: services/user-service/Dockerfile
-    ports:
-      - "8002:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       postgres:
         condition: service_healthy
@@ -154,14 +146,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   project-service:
     build:
       context: .
       dockerfile: services/project-service/Dockerfile
-    ports:
-      - "8003:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       postgres:
         condition: service_healthy
@@ -180,14 +171,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   issue-service:
     build:
       context: .
       dockerfile: services/issue-service/Dockerfile
-    ports:
-      - "8004:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       postgres:
         condition: service_healthy
@@ -206,14 +196,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   comment-service:
     build:
       context: .
       dockerfile: services/comment-service/Dockerfile
-    ports:
-      - "8005:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       postgres:
         condition: service_healthy
@@ -232,14 +221,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   notification-service:
     build:
       context: .
       dockerfile: services/notification-service/Dockerfile
-    ports:
-      - "8006:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -255,14 +243,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   search-service:
     build:
       context: .
       dockerfile: services/search-service/Dockerfile
-    ports:
-      - "8007:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -280,14 +267,13 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
   audit-service:
     build:
       context: .
       dockerfile: services/audit-service/Dockerfile
-    ports:
-      - "8008:8000"
+    # ports removed - internal network only, access via api-gateway
     depends_on:
       postgres:
         condition: service_healthy
@@ -304,7 +290,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - issue_tracker_network
+      - internal
 
 volumes:
   postgres_data:
@@ -313,5 +299,8 @@ volumes:
   elasticsearch_data:
 
 networks:
-  issue_tracker_network:
+  public:
     driver: bridge
+  internal:
+    driver: bridge
+    internal: true

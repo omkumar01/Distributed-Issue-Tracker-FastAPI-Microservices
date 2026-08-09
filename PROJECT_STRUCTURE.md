@@ -186,14 +186,14 @@ docs/
 | Service | Port | Function |
 |---------|------|----------|
 | API Gateway | 8000 | Request routing |
-| Auth Service | 8001 | Authentication |
-| User Service | 8002 | User management |
-| Project Service | 8003 | Projects |
-| Issue Service | 8004 | Issues |
-| Comment Service | 8005 | Comments |
-| Notification Service | 8006 | Notifications |
-| Search Service | 8007 | Full-text search |
-| Audit Service | 8008 | Audit logs |
+| Auth Service | 8000 | Authentication |
+| User Service | 8000 | User management |
+| Project Service | 8000 | Projects |
+| Issue Service | 8000 | Issues |
+| Comment Service | 8000 | Comments |
+| Notification Service | 8000 | Notifications |
+| Search Service | 8000 | Full-text search |
+| Audit Service | 8000 | Audit logs |
 | PostgreSQL | 5432 | Primary database |
 | Redis | 6379 | Caching/sessions |
 | RabbitMQ | 5672 | Message broker |
