@@ -25,7 +25,7 @@ router = APIRouter()
 
 # ============ Audit Log Endpoints ============
 
-@router.post("", response_model=AuditLogResponse, status_code=201, tags=["audit-logs"])
+@router.post("/logs", response_model=AuditLogResponse, status_code=201, tags=["audit-logs"])
 async def create_audit_log(
     log_data: AuditLogCreate,
     db: AsyncSession = Depends(get_session)
