@@ -144,3 +144,6 @@ k8s/overlays/local/
 config/local.yml
 logs/
 data/
+
+# logs
+*.log
