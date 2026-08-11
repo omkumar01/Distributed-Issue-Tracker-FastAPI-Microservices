@@ -25,7 +25,7 @@ router = APIRouter()
 
 # ============ Audit Log Endpoints ============
 
-@router.post("/logs", response_model=AuditLogResponse, status_code=201, tags=["audit-logs"])
+@router.post("/audit/logs", response_model=AuditLogResponse, status_code=201, tags=["audit-logs"])
 async def create_audit_log(
     log_data: AuditLogCreate,
     db: AsyncSession = Depends(get_session)
@@ -39,7 +39,7 @@ async def create_audit_log(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/logs/{log_id}", response_model=AuditLogResponse, tags=["audit-logs"])
+@router.get("/audit/logs/{log_id}", response_model=AuditLogResponse, tags=["audit-logs"])
 async def get_audit_log(
     log_id: UUID,
     db: AsyncSession = Depends(get_session)
@@ -53,7 +53,7 @@ async def get_audit_log(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/logs", response_model=dict, tags=["audit-logs"])
+@router.get("/audit/logs", response_model=dict, tags=["audit-logs"])
 async def list_audit_logs(
     actor_id: Optional[UUID] = Query(None),
     action: Optional[str] = Query(None),
@@ -114,7 +114,7 @@ async def get_user_activity(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/stats", tags=["audit-logs"])
+@router.get("audit/stats", tags=["audit-logs"])
 async def get_audit_stats(
     days: int = Query(30, ge=1, le=365),
     db: AsyncSession = Depends(get_session)
