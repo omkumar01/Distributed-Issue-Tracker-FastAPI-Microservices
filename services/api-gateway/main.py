@@ -105,14 +105,19 @@ async def gateway_router(path: str, request: Request):
     service_url = SERVICE_URLS[service_name]
     # Pass the entirely unmodified path to the microservices, because their routers EXPECT the prefix!
     target_url = f"{service_url}/api/v1/{path}"
-    
+
+    # Preserve query string when forwarding (httpx does not auto-forward it from a URL string)
+    query_string = request.url.query
+    if query_string:
+        target_url = f"{target_url}?{query_string}"
+
     try:
         async with httpx.AsyncClient() as client:
             # Forward request
             response = await client.request(
                 method=request.method,
                 url=target_url,
-                headers={key: value for key, value in request.headers.items() 
+                headers={key: value for key, value in request.headers.items()
                         if key != "host"},
                 content=await request.body() if request.method != "GET" else None,
                 timeout=30

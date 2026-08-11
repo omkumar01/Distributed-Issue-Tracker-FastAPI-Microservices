@@ -3,7 +3,7 @@ from src.indexers.es_client import async_es_client
 
 router = APIRouter()
 
-@router.get("/")
+@router.get("")
 async def search_all(q: str):
     """Full-text search across issues and comments."""
     response = await async_es_client.search(
