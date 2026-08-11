@@ -10,12 +10,13 @@ from shared.schemas import IssueStatus
 # Key: Current Status
 # Value: Set of allowed Next Statuses
 TRANSITIONS: Dict[IssueStatus, Set[IssueStatus]] = {
-    IssueStatus.BACKLOG: {IssueStatus.TODO, IssueStatus.CLOSED},
-    IssueStatus.TODO: {IssueStatus.BACKLOG, IssueStatus.IN_PROGRESS, IssueStatus.CLOSED},
-    IssueStatus.IN_PROGRESS: {IssueStatus.TODO, IssueStatus.IN_REVIEW, IssueStatus.CLOSED},
-    IssueStatus.IN_REVIEW: {IssueStatus.IN_PROGRESS, IssueStatus.DONE, IssueStatus.CLOSED},
+    IssueStatus.BACKLOG: {IssueStatus.TODO, IssueStatus.CLOSED, IssueStatus.IN_PROGRESS, IssueStatus.IN_REVIEW, IssueStatus.CANCELED},
+    IssueStatus.TODO: {IssueStatus.BACKLOG, IssueStatus.IN_PROGRESS, IssueStatus.CANCELED},
+    IssueStatus.IN_PROGRESS: {IssueStatus.TODO, IssueStatus.IN_REVIEW, IssueStatus.CANCELED},
+    IssueStatus.IN_REVIEW: {IssueStatus.IN_PROGRESS, IssueStatus.DONE, IssueStatus.CANCELED},
     IssueStatus.DONE: {IssueStatus.IN_PROGRESS, IssueStatus.CLOSED, IssueStatus.IN_REVIEW}, # Re-open or close
-    IssueStatus.CLOSED: {IssueStatus.BACKLOG, IssueStatus.TODO} # Re-open
+    IssueStatus.CLOSED: {IssueStatus.BACKLOG, IssueStatus.TODO}, # Re-open
+    IssueStatus.CANCELED: {IssueStatus.TODO} #canceled can be reopened to backlog or todo
 }
 
 class WorkflowService:

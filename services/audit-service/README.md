@@ -4,6 +4,8 @@
 
 A production-grade audit logging and compliance service for tracking all system activities, managing compliance events, and monitoring data access.
 
+> **Routing note.** This service is fronted by the API gateway, which routes requests whose first path segment is `audit`. The service therefore mounts all of its routes under `/api/v1/audit/*` (e.g. `/api/v1/audit/logs`, `/api/v1/audit/stats`, `/api/v1/audit/compliance`, `/api/v1/audit/data-access/...`). The OpenAPI spec at `docs/openapi/audit-service.json` matches these paths. When calling the service **directly** (e.g. for local debugging without the gateway), use the same paths.
+
 ## Features
 
 - **Audit Logging**: Track all user actions with complete change history

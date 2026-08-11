@@ -123,9 +123,12 @@ async def root():
         "version": "1.0.0",
         "description": "Manage audit logs, compliance events, and data access",
         "endpoints": {
-            "audit_logs": "/api/v1",
-            "compliance": "/api/v1/compliance",
-            "data_access": "/api/v1/data-access",
+            "audit_logs": "/api/v1/audit/logs",
+            "compliance": "/api/v1/audit/compliance",
+            "data_access": "/api/v1/audit/data-access",
+            "stats": "/api/v1/audit/stats",
+            "resource_history": "/api/v1/audit/resource/{resource_id}",
+            "user_activity": "/api/v1/audit/user/{actor_id}/activity",
             "health": "/health",
             "docs": "/docs",
             "openapi": "/openapi.json"

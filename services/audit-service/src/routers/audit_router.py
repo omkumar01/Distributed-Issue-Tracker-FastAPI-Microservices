@@ -84,7 +84,7 @@ async def list_audit_logs(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/resource/{resource_id}", tags=["audit-logs"])
+@router.get("/audit/resource/{resource_id}", tags=["audit-logs"])
 async def get_resource_audit_history(
     resource_id: UUID,
     resource_type: str = Query(...),
@@ -99,7 +99,7 @@ async def get_resource_audit_history(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/user/{actor_id}/activity", tags=["audit-logs"])
+@router.get("/audit/user/{actor_id}/activity", tags=["audit-logs"])
 async def get_user_activity(
     actor_id: UUID,
     db: AsyncSession = Depends(get_session)
@@ -114,7 +114,7 @@ async def get_user_activity(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("audit/stats", tags=["audit-logs"])
+@router.get("/audit/stats", tags=["audit-logs"])
 async def get_audit_stats(
     days: int = Query(30, ge=1, le=365),
     db: AsyncSession = Depends(get_session)
@@ -130,7 +130,7 @@ async def get_audit_stats(
 
 # ============ Compliance Event Endpoints ============
 
-@router.post("/compliance", response_model=ComplianceEventResponse, status_code=201, tags=["compliance"])
+@router.post("/audit/compliance", response_model=ComplianceEventResponse, status_code=201, tags=["compliance"])
 async def create_compliance_event(
     event_data: ComplianceEventCreate,
     db: AsyncSession = Depends(get_session)
@@ -144,7 +144,7 @@ async def create_compliance_event(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/compliance/{event_id}", response_model=ComplianceEventResponse, tags=["compliance"])
+@router.get("/audit/compliance/{event_id}", response_model=ComplianceEventResponse, tags=["compliance"])
 async def get_compliance_event(
     event_id: UUID,
     db: AsyncSession = Depends(get_session)
@@ -158,7 +158,7 @@ async def get_compliance_event(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/compliance", response_model=dict, tags=["compliance"])
+@router.get("/audit/compliance", response_model=dict, tags=["compliance"])
 async def list_compliance_events(
     severity: Optional[str] = Query(None),
     event_type: Optional[str] = Query(None),
@@ -177,7 +177,7 @@ async def list_compliance_events(
 
 # ============ Data Access Log Endpoints ============
 
-@router.post("/data-access", response_model=DataAccessLogResponse, status_code=201, tags=["data-access"])
+@router.post("/audit/data-access", response_model=DataAccessLogResponse, status_code=201, tags=["data-access"])
 async def log_data_access(
     access_data: DataAccessLogCreate,
     db: AsyncSession = Depends(get_session)
@@ -191,7 +191,7 @@ async def log_data_access(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/data-access/unauthorized", tags=["data-access"])
+@router.get("/audit/data-access/unauthorized", tags=["data-access"])
 async def get_unauthorized_accesses(
     days: int = Query(30, ge=1, le=365),
     limit: int = Query(100, ge=1, le=500),
@@ -207,7 +207,7 @@ async def get_unauthorized_accesses(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/data-access/summary", response_model=DataAccessSummary, tags=["data-access"])
+@router.get("/audit/data-access/summary", response_model=DataAccessSummary, tags=["data-access"])
 async def get_data_access_summary(
     days: int = Query(30, ge=1, le=365),
     db: AsyncSession = Depends(get_session)
@@ -221,7 +221,7 @@ async def get_data_access_summary(
         raise HTTPException(status_code=e.status_code, detail=e.message)
 
 
-@router.get("/data-access/{log_id}", response_model=DataAccessLogResponse, tags=["data-access"])
+@router.get("/audit/data-access/{log_id}", response_model=DataAccessLogResponse, tags=["data-access"])
 async def get_data_access_log(
     log_id: UUID,
     db: AsyncSession = Depends(get_session)

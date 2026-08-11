@@ -18,6 +18,7 @@ class IssueStatus(str, Enum):
     IN_REVIEW = "in_review"
     DONE = "done"
     CLOSED = "closed"
+    CANCELED = "canceled"
 
 
 class IssuePriority(str, Enum):
